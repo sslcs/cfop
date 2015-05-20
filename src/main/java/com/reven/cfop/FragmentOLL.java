@@ -155,7 +155,7 @@ public class FragmentOLL extends Fragment
         images.add(R.drawable.o_56);
         steps.add("F(RUR'<u>U'</u>)(RF')(rUR'<u>U'</u>)r'");
         images.add(R.drawable.o_57);
-        steps.add("r'(RU)(RUR'<u>U'</u>r2)(R2'U)(R<u>U'</u>)r'");
+        steps.add("(r'RU)(RUR'<u>U'</u>r2R2')(UR<u>U'</u>r')");
 
         QuickAdapter<Integer> adapter = new QuickAdapter<Integer>(getActivity(), R.layout.item)
         {
