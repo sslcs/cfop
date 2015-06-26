@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">CFOP</string>
-    <string name="oll">OLL</string>
-    <string name="pll">PLL</string>
-
+    <string name="app_name">魔方公式</string>
 </resources>

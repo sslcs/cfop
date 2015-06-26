@@ -1,77 +1,44 @@
 package com.reven.cfop;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class ActivityMain extends ActionBarActivity
-{
+import java.util.Arrays;
+import java.util.List;
+
+public class ActivityMain extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.actionbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        final View tvOLL = findViewById(R.id.tv_oll);
-        final View tvPLL = findViewById(R.id.tv_pll);
-        tvOLL.setSelected(true);
-        tvOLL.setOnClickListener(new View.OnClickListener()
-        {
+        toolbar.setNavigationIcon(R.drawable.ic_exit);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                tvOLL.setSelected(true);
-                tvPLL.setSelected(false);
-                viewPager.setCurrentItem(0);
-            }
-        });
-        tvPLL.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                tvOLL.setSelected(false);
-                tvPLL.setSelected(true);
-                viewPager.setCurrentItem(1);
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
+        List<String> tabTitles = Arrays.asList("OLL", "PLL", "BLD");
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabTitles);
         adapter.add(new FragmentOLL());
         adapter.add(new FragmentPLL());
+        adapter.add(new FragmentPLL());
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
-        {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-            {
-            }
 
-            @Override
-            public void onPageSelected(int position)
-            {
-                if (position == 1)
-                {
-                    tvPLL.setSelected(true);
-                    tvOLL.setSelected(false);
-                }
-                else
-                {
-                    tvPLL.setSelected(false);
-                    tvOLL.setSelected(true);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state)
-            {
-            }
-        });
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
+        tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
+        tabLayout.setTabsFromPagerAdapter(adapter);//给Tabs设置适配器
     }
 }
