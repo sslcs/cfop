@@ -1,6 +1,5 @@
 package com.reven.cfop;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -31,14 +30,14 @@ public class ActivityMain extends AppCompatActivity {
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabTitles);
         adapter.add(new FragmentOLL());
         adapter.add(new FragmentPLL());
-        adapter.add(new FragmentPLL());
+        adapter.add(new FragmentBLD());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
-        tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
-        tabLayout.setTabsFromPagerAdapter(adapter);//给Tabs设置适配器
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabsFromPagerAdapter(adapter);
     }
 }

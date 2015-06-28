@@ -2,30 +2,30 @@ package com.reven.cfop;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
-import com.joanzapata.android.BaseAdapterHelper;
-import com.joanzapata.android.QuickAdapter;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-public class FragmentOLL extends Fragment
-{
+import jp.wasabeef.recyclerview.animators.ScaleInRightAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
+import jp.wasabeef.recyclerview.animators.adapters.SlideInRightAnimationAdapter;
+
+public class FragmentOLL extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_oll, container, false);
         initLayout(view);
+
         return view;
     }
 
     @SuppressWarnings("SpellCheckingInspection")
-    private void initLayout(View view)
-    {
+    private void initLayout(View view) {
         final ArrayList<Integer> images = new ArrayList<>(57);
         final ArrayList<String> steps = new ArrayList<>(57);
 
@@ -157,22 +157,11 @@ public class FragmentOLL extends Fragment
         images.add(R.drawable.o_57);
         steps.add("(r'RU)(RUR'<u>U'</u>r2R2')(UR<u>U'</u>r')");
 
-        QuickAdapter<Integer> adapter = new QuickAdapter<Integer>(getActivity(), R.layout.item)
-        {
-            @Override
-            protected void convert(BaseAdapterHelper helper, Integer resId)
-            {
-                helper.setImageResource(R.id.iv_step, resId);
+        RecyclerView rvOLL = (RecyclerView) view.findViewById(R.id.rv_oll);
+        rvOLL.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
+        rvOLL.setItemAnimator(new SlideInRightAnimator());
 
-                TextView tvStep = helper.getView(R.id.tv_step);
-                int position = helper.getPosition();
-                String step = (position + 1) + "> " + steps.get(position);
-                tvStep.setText(Html.fromHtml(step));
-            }
-        };
-        adapter.addAll(images);
-
-        ListView gridView = (ListView) view.findViewById(R.id.lv_oll);
-        gridView.setAdapter(adapter);
+        FormulaAdapter adapter = new FormulaAdapter(getActivity(), images, steps);
+        rvOLL.setAdapter(new SlideInRightAnimationAdapter(adapter));
     }
 }

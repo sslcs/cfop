@@ -2,29 +2,26 @@ package com.reven.cfop;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
-import android.text.Spanned;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import com.joanzapata.android.BaseAdapterHelper;
-import com.joanzapata.android.QuickAdapter;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-public class FragmentPLL extends Fragment
-{
+public class FragmentPLL extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pll, container, false);
         initLayout(view);
         return view;
     }
 
-    private void initLayout(View view)
-    {
+    @SuppressWarnings("SpellCheckingInspection")
+    private void initLayout(View view) {
         final ArrayList<Integer> images = new ArrayList<>(21);
         final ArrayList<String> steps = new ArrayList<>(21);
         images.add(R.drawable.p_01);
@@ -70,19 +67,11 @@ public class FragmentPLL extends Fragment
         images.add(R.drawable.p_21);
         steps.add("(R'UR'F)(RF')(RU'R'F')(UF)(RUR'<u>U</u>'R)");
 
-        QuickAdapter<Integer> adapter = new QuickAdapter<Integer>(getActivity(), R.layout.item)
-        {
-            @Override
-            protected void convert(BaseAdapterHelper helper, Integer resId)
-            {
-                helper.setImageResource(R.id.iv_step, resId);
-                Spanned step = Html.fromHtml(steps.get(helper.getPosition()));
-                helper.setText(R.id.tv_step, step.toString());
-            }
-        };
-        adapter.addAll(images);
+        RecyclerView rvPLL = (RecyclerView) view.findViewById(R.id.rv_pll);
+        rvPLL.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
+        rvPLL.setItemAnimator(new DefaultItemAnimator());
 
-        ListView lvSteps = (ListView) view.findViewById(R.id.lv_pll);
-        lvSteps.setAdapter(adapter);
+        FormulaAdapter adapter = new FormulaAdapter(getActivity(), images, steps);
+        rvPLL.setAdapter(adapter);
     }
 }
