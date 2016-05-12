@@ -51,7 +51,7 @@ public class FragmentOLL extends Fragment
         images.add(R.drawable.o_09);
         steps.add("f(RUR'<u>U'</u>)f'");
         images.add(R.drawable.o_10);
-        steps.add("f'(L'U'LU)<em>f</em>");
+        steps.add("x'<u>U'</u>F'R'FRU");
         images.add(R.drawable.o_11);
         steps.add("(RUR'<u>U'</u>)(R'FRF')");
         images.add(R.drawable.o_12);
@@ -115,7 +115,7 @@ public class FragmentOLL extends Fragment
         images.add(R.drawable.o_38);
         steps.add("(RUR'U)(R<u>U'</u>R'<u>U'</u>)(R'FRF')");
         images.add(R.drawable.o_39);
-        steps.add("R'U'RU'R'URUl<u>U'</u>R'U");
+        steps.add("(R'<u>U'</u>RU')(R'URU)(RB'R'B)");
         images.add(R.drawable.o_40);
         steps.add("L2lU'z(UR'<u>U'</u>)(R2UR')z'rR'");
         images.add(R.drawable.o_41);
