@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="base-adapter-helper-1.1.10">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/base-adapter-helper-1.1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/lib/base-adapter-helper-1.1.10.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -2,15 +2,13 @@ package com.reven.cfop;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class ActivityMain extends ActionBarActivity
-{
+public class ActivityMain extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -21,21 +19,17 @@ public class ActivityMain extends ActionBarActivity
         final View tvOLL = findViewById(R.id.tv_oll);
         final View tvPLL = findViewById(R.id.tv_pll);
         tvOLL.setSelected(true);
-        tvOLL.setOnClickListener(new View.OnClickListener()
-        {
+        tvOLL.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 tvOLL.setSelected(true);
                 tvPLL.setSelected(false);
                 viewPager.setCurrentItem(0);
             }
         });
-        tvPLL.setOnClickListener(new View.OnClickListener()
-        {
+        tvPLL.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 tvOLL.setSelected(false);
                 tvPLL.setSelected(true);
                 viewPager.setCurrentItem(1);
@@ -46,31 +40,11 @@ public class ActivityMain extends ActionBarActivity
         adapter.add(new FragmentOLL());
         adapter.add(new FragmentPLL());
         viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
-        {
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-            {
-            }
-
-            @Override
-            public void onPageSelected(int position)
-            {
-                if (position == 1)
-                {
-                    tvPLL.setSelected(true);
-                    tvOLL.setSelected(false);
-                }
-                else
-                {
-                    tvPLL.setSelected(false);
-                    tvOLL.setSelected(true);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state)
-            {
+            public void onPageSelected(int position) {
+                tvPLL.setSelected(position == 1);
+                tvOLL.setSelected(position != 1);
             }
         });
     }
